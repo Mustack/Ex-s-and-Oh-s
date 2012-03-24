@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django import forms
 
@@ -13,8 +14,8 @@ def home(request):
         form = LoginForm()
         return render_to_response('login.html', {
                 'error' : error,
-                'form' : form,
-        })
+                'form' : form,},
+                context_instance=RequestContext(request))
         
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -27,7 +28,8 @@ def home(request):
                     login(request, user)
                     player = Player.objects.get(pk=username)
                     return render_to_response('main.html', {
-                        'player': player,})
+                        'player' : player,},
+                        context_instance=RequestContext(request))
                     
             else:
                 #If try succeeds then the username exists and the password is wrong
@@ -47,7 +49,8 @@ def home(request):
                     player.save()
                     #time for the player to start playing
                     return render_to_response('main.html', {
-                        'player':player,})
+                        'player' : player,},
+                        context_instance=RequestContext(request))
                     
         else:
             error = 'form is invalid'
@@ -55,8 +58,8 @@ def home(request):
     else:
         form = LoginForm()
         return render_to_response('home.html', {
-            'login_form': form,
-        })
+            'login_form' : form,},
+            context_instance=RequestContext(request))
 
 def main(request):
     return render_to_response("main.html")

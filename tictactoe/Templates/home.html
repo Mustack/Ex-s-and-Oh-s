@@ -4,7 +4,7 @@
 <p> Please login/register</p>
 
 <form method="post" action="">
-    {{login_form}}
+    {% csrf_token %} {{login_form}}
     <input type="submit" value="Login"/>
 </form>
 
