@@ -5,8 +5,8 @@ from django.conf.urls.defaults import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'tictactoe.views.home', name='home'),
+    url(r'^$', 'tictactoe.app.views.home'),
+    url(r'main/', 'tictactoe.app.views.main')
     # url(r'^tictactoe/', include('tictactoe.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

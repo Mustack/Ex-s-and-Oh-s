@@ -1,0 +1,15 @@
+{% load static %}
+
+<html>
+
+<head>
+    <LINK REL=StyleSheet HREF="{% get_static_prefix %}style.css" TYPE="text/css" MEDIA=screen>
+    <title>Ex's and Oh's</title>
+    {% block static %}{% endblock %}
+</head>
+
+<body>
+    <h1>Ex's and Oh's</h1>
+    {% block content %}{% endblock %}
+</body>
+</html>

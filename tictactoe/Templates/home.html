@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p> Please login/register</p>
+
+<form method="post" action="">
+    {{login_form}}
+    <input type="submit" value="Login"/>
+</form>
+
+<a href="/main/">Continue As Guest</a>
+{% endblock %}

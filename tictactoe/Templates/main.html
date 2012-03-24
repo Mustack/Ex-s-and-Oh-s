@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block static %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+<script src="{% get_static_prefix %}tictactoe.js"></script>
+{% endblock %}
+
+{% block content %}
+<table border="0px" align="center">
+<tr><td>
+<div id="menu"></div>
+<div id="board"></div>
+</td></tr>
+</table>
+    
+<br><p> Leaderboard</p>
+    
+<table border="1px" align="center">
+    {% for player in leaderboard %}
+        <tr>
+            <td>{% filter force_escape %} {{ forloop.counter }}. {% endfilter %}</td>
+            <td>{{ player.name }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
