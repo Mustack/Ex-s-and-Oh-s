@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from tictactoe.app.models import Player
 from django.contrib.auth import authenticate, login
 from django import forms
 
