@@ -3,4 +3,5 @@ from django.db import models
 
 class Player(models.Model):
     user = models.ForeignKey(User, unique=True)
+    name = models.CharField(max_length=15, primary_key=True)
     win_count = models.IntegerField()

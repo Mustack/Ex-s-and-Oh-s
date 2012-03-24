@@ -46,7 +46,7 @@ def home(request):
                     newUser = authenticate(username=username, password=password)
                     login(request, newUser)
                     #now a Player with that user
-                    player = Player(user=newUser, win_count=0)
+                    player = Player(user=newUser, name = username, win_count=0)
                     player.save()
                     #time for the player to start playing
                     return render_to_response('main.html', {
