@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from tictactoe.app.models import Player
 from django.contrib.auth.models import User
@@ -66,11 +66,26 @@ def home(request):
             context_instance=RequestContext(request))
 
 def main(request):
-    return render_to_response("main.html", {
+        
+    if request.user.is_authenticated():
+        player = Player.objects.get(pk=request.user.username)
+        return render_to_response("main.html", {
+                        'player' : player,
                         'leaderboard' : getLeaderboard(),},)
+        
+    return render_to_response("main.html", {'leaderboard' : getLeaderboard(),},)
+
 def logout_view(request):
     logout(request)
-    return home(request)
+    return redirect('/home/')
+
+def increment(request):
+    if request.user.is_authenticated():
+        player = Player.objects.get(pk=request.user.username)
+        player.win_count = player.win_count + 1
+        player.save()
+        
+    return redirect('/main/')
 
 def getLeaderboard():
     return Player.objects.all()[:5]

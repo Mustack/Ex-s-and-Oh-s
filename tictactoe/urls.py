@@ -6,8 +6,10 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'^$', 'tictactoe.app.views.home'),
+    url(r'home/', 'tictactoe.app.views.home'),
     url(r'main/', 'tictactoe.app.views.main'),
-    url(r'logout/', 'tictactoe.app.views.logout_view')
+    url(r'logout/', 'tictactoe.app.views.logout_view'),
+    url(r'increment/', 'tictactoe.app.views.increment')
     # url(r'^tictactoe/', include('tictactoe.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
