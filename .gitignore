@@ -1,5 +1,6 @@
 venv/
 *.pyc
+*.swp
 .DS_Store
 .project
 .pydevproject
