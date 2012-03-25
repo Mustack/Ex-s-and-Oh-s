@@ -13,6 +13,12 @@ body {
   align: center;
 }
 
+table.leaderboard tr td {
+  font-size:100%;
+  height: 35px;
+  width: 100px;
+}
+
 td {
   height: 200px;
   width: 200px;

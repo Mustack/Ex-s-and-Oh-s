@@ -3,6 +3,11 @@
 {% block content %}
 <p> Please login/register</p>
 
+{% if error %}
+<p style="color:red">{{ error }}</p>
+<br>
+{% endif %}
+
 <form method="post" action="">
     {% csrf_token %} {{login_form}}
     <input type="submit" value="Login"/>

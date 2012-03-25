@@ -6,7 +6,18 @@
 <script src="{% get_static_prefix %}tictactoe.js"></script>
 {% endblock %}
 
+
 {% block content %}
+
+{% if player %}
+<p>You have {{ player.win_count }} wins.</p>
+<a href="/logout/">Logout,</a> from {{ player.name }}
+
+{% else %}
+<p>You are logged in as a guest.</p>
+<a href="/">Login,</a> to have your wins counted.
+{% endif %}
+
 <table border="0px" align="center">
 <tr><td>
 <div id="menu"></div>
@@ -14,14 +25,10 @@
 </td></tr>
 </table>
     
-<br><p> Leaderboard</p>
-    
-<table border="1px" align="center">
-    {% for player in leaderboard %}
-        <tr>
-            <td>{% filter force_escape %} {{ forloop.counter }}. {% endfilter %}</td>
-            <td>{{ player.name }}</td>
-        </tr>
-    {% endfor %}
-</table>
+<br><h2> Leaderboard</h2>
+
+{% for player in leaderboard %}
+    <p>{{ forloop.counter }}. {% filter force_escape %}{{ player.name }} ({{player.win_count}} wins){% endfilter %}</p>
+{% endfor %}
+
 {% endblock %}

@@ -1,7 +1,8 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from tictactoe.app.models import Player
-from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django import forms
 
 
@@ -13,9 +14,9 @@ class LoginForm(forms.Form):
 def home(request):
     def errorHandle(error):
         form = LoginForm()
-        return render_to_response('login.html', {
+        return render_to_response('home.html', {
                 'error' : error,
-                'form' : form,},
+                'login_form' : form,},
                 context_instance=RequestContext(request))
         
     if request.method == 'POST':
@@ -29,7 +30,8 @@ def home(request):
                     login(request, user)
                     player = Player.objects.get(pk=username)
                     return render_to_response('main.html', {
-                        'player' : player,},
+                        'player' : player,
+                        'leaderboard' : getLeaderboard(),},
                         context_instance=RequestContext(request))
                     
             else:
@@ -50,7 +52,8 @@ def home(request):
                     player.save()
                     #time for the player to start playing
                     return render_to_response('main.html', {
-                        'player' : player,},
+                        'player' : player,
+                        'leaderboard' : getLeaderboard(),},
                         context_instance=RequestContext(request))
                     
         else:
@@ -63,4 +66,11 @@ def home(request):
             context_instance=RequestContext(request))
 
 def main(request):
-    return render_to_response("main.html")
+    return render_to_response("main.html", {
+                        'leaderboard' : getLeaderboard(),},)
+def logout_view(request):
+    logout(request)
+    return home(request)
+
+def getLeaderboard():
+    return Player.objects.all()[:5]
